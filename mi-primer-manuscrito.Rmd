@@ -1,0 +1,261 @@
+---
+title: Biometría de dedos en estudiantes de Biogeografía 2025-01, UASD, utilizando t-Student \newline \textit{\large Finger biometry on Biogeography students 2025-01, UASD, using t-student }
+authors:
+  - name: \parbox[t]{10cm}{\centering Wellin Brito \\ \orcidlink{0009-0003-2236-6441}}
+    affiliation: Universidad Autónoma de Santo Domingo (UASD)
+    location:  Santo Domingo, República Dominicana
+    email: wellindcbrito@gmail.com
+resumen: |
+  Este trabajo presenta un análisis de las mediciones de los dedos de los estudiantes de la materia de Biogeografía (semestre 2025-01) en la Universidad Autónoma de Santo Domingo, utilizando la herramienta estadística t-Student en RStudio. Se compararon dos muestras: una aleatoria y otra basada en la comparación de sexos. Los datos fueron recolectados utilizando una regla en centímetros y un formulario de Google. Los cálculos estadísticos se realizaron con t-Student, lo que permitió comparar las medias de las muestras bajo las condiciones de normalidad e independencia. Los resultados mostraron que los valores de t en ambos ejercicios (-0.41 y 0.53) no indicaron una diferencia significativa entre las muestras, lo que llevó a no rechazar la hipótesis nula de homogeneidad de medias.
+abstract: |
+  This study presents an analysis of finger measurements from students in the Biogeography course (semester 2025-01) at the Autonomous University of Santo Domingo, using the t-Student statistical tool in RStudio. Two samples were compared: one random and another based on sex comparison. Data were collected using a centimeter ruler and a Google form. Statistical calculations were performed using t-Student, which allowed for comparing sample means under normality and independence conditions. The results showed that the t-values in both exercises (-0.41 and 0.53) did not indicate a significant difference between the samples, leading to the acceptance of the null hypothesis of mean homogeneity.
+palabrasclave:
+  - Medición de dedos
+  - Rstudio
+  - t-student
+keywords:
+  - fingers measurements
+  - Rstudio
+  - t-student
+bibliography: "mi_bibliografia.bib"
+csl: apa-es.csl
+lang: es
+output: 
+  pdf_document:
+    latex_engine: xelatex 
+    template: "template.tex"
+    keep_tex: true
+    citation_package: "biblatex"
+editor_options: 
+  chunk_output_type: console
+always_allow_html: true
+header-includes:
+  \usepackage{orcidlink}
+  \usepackage{float}
+  \usepackage[all]{nowidow}
+  \usepackage[spanish]{babel}
+  \usepackage{pdflscape}
+  \renewcommand\spanishtablename{Tabla}
+  \usepackage{xcolor}
+  \usepackage{tabu}
+  \renewcommand\tablename{Tabla}
+  \renewcommand\figurename{Figura}
+  \usepackage{xurl}
+  \usepackage[left]{lineno}
+  \linenumbers
+---
+
+```{r, eval=FALSE, include=FALSE}
+library(knitr)
+library(kableExtra)
+opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.pos = 'H'
+)
+source('R/funciones.R')
+```
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  cache = FALSE, 
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  out.width = '80%',
+  dpi = 300,
+  fig.align = "center"
+  )
+# options(digits = 3)
+options(knitr.duplicate.label = "allow")
+source('R/funciones.R')
+```
+
+
+```{r pkgsetings, echo=F, include=F}
+set.seed(99)
+library(tidyverse)
+theme_set(theme_bw()) 
+library(kableExtra)
+options(knitr.kable.NA = '', knitr.table.format = 'latex')
+```
+
+
+# "Hola Mundo" {.unnumbered}
+
+```{r}
+print("Hola Mundo")
+cat ("hola Mundo\n")
+```
+
+
+# Introducción
+
+La medición de las manos y de los dedos para entender distintos aspectos de la vida humana no es un tema nuevo. Más allá de las prácticas de adivinanzas realizadas con las manos, varios estudios científicos han buscado la relación entre distintas mediciones y otras características. Un ejemplo de esto, es el estudio realizado por investigadores chilenos sobre los aspectos biométricos de la mano de individuos chilenos, buscando registrar los datos de las manos de esta población \citep(@Binvignat2012).
+
+El presente trabajo presenta las mediciones de los dedos de las manos de varios estudiantes de la materia de Biogeografía (semestre 2025-01), en la Universidad Autónoma de Santo Domingo, así como calcular ciertos aspectos estadísticos como la herramienta t-Student en el programa R-studio. 
+
+
+```{r fig1, echo=FALSE, out.width="70%"}
+knitr::include_graphics("1.jpeg")
+```
+
+```{r fig2, echo=FALSE, out.width="70%"}
+knitr::include_graphics("2.jpeg")
+```
+
+```{r fig3, echo=FALSE, out.width="70%"}
+knitr::include_graphics("3.jpeg")
+```
+
+
+# Materiales y métodos
+
+Para el siguiente trabajo se utilizó una regla común, en centímetros, un formulario de google para llenar los datos y su hoja de excel correspondiente para visualizar los datos. El cálculo estadístico correspondiente fue Tstudent, se fundamenta principalmente en dos aspectos; el primero: en la distribución de normalidad, y el segundo: en que las muestras sean independientes. Permite comparar muestras y establece la diferencia entre las medias de las muestras \citep(@Sanchez2015). Igualmente, se prefirió redactar este texto en la herramienta R-studio, ya que ofrece la posibilidad de automatización de los cálculos estadísticos para el análisis de los datos \citep(@Martinez2017) y para indexar pdf de forma eficiente. Se realizaron dos estudios, uno cuya muestra es aleatoria, y el otro en el que las muestras corresponden a sexos diferentes, para ver si existía una diferencia significativa. 
+
+Las formulas utilizadas son las siguientes: 
+- Para el primer ejercicio, con el conjunto 10, datos de dos estudiantes aleatorios.
+
+```{r fig4, echo=FALSE, out.width="70%"}
+knitr::include_graphics("Screenshot 2025-02-16 122200.png")
+```
+
+- Para el segundo ejercicio, con el conjunto 30, variables independientes, donde se compararon dos muestras con tres estudiantes cada una, cada muestra representando un sexo diferente. Se utilizó la siguiente fórmula. 
+
+```{r fig5, echo=FALSE, out.width="70%", fig.keep= "all"}
+knitr::include_graphics("Screenshot 2.png")
+```
+
+- A continuación, observamos las tablas de los datos de cada ejercicio. 
+
+```{r table_fingers, echo=FALSE, message=FALSE, fig.keep= "all", results='asis'}
+library(knitr)
+library(kableExtra)
+
+Ejercicio_1_Conjunto_10 <- data.frame(
+  Dedo = c("Pulgar", "Índice", "Medio", "Anular", "Meñique"),
+  Wellin = c(6.1, 6.6, 7.5, 7.2, 5.6),
+  Nathali = c(6.0, 8.0, 8.7, 7.2, 6.2)
+)
+
+
+kable(Ejercicio_1_Conjunto_10, caption = "Mediciones de los dedos de la mano de Wellin y Nathali (en cm)") %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+```{r table_fingers2, echo=FALSE, message=FALSE, results='asis'}
+library(knitr)
+library(kableExtra)
+
+
+Ejercicio_2_Conjunto_30 <- data.frame(
+  Estudiante = c("Estudiante1", "Estudiante2", "Estudiante3"),
+  muestra_hombres = c(8.0, 7.5, 9.0),
+  muestra_mujeres = c(8.1, 8.0, 7.5)
+)
+
+
+kable(Ejercicio_2_Conjunto_30, caption = "Mediciones de los dedos mayores de tres estudiantes de cada sexo (en cm)") %>%
+  kable_styling(latex_options = "HOLD_position")
+```
+
+Podemos visualizarlo en un diagrama de caja:
+
+```{r table_fingers6, echo=FALSE, message=FALSE}
+ muestra_hombres = c(8.0, 7.5, 9.0)
+ muestra_mujeres = c(8.1, 8.0, 7.5)
+
+
+
+boxplot(muestra_hombres, muestra_mujeres, 
+        names = c("Hombres", "Mujeres"),
+        col = c("lightgreen", "lightpink"),
+        vertical = TRUE, xlab = "Medidas", ylab = "Muestras")
+```
+
+
+# Resultados
+
+Para el ejercicio 1, se calculó la media del conjunto 10, y luego la varianza, la cual fue de 0.68, mientras que el estadístico de prueba (tstudent) dio como resultado -0.41. El df= 4. En el ejercicio 2, se calculó la media de ambas muestras. Posteriormente, se calculó la varianza de la muestra 1 (hombres), dio un total de 0.585; la varianza de la muestra 2 fue de un 0.105. Al calcular la t (estadístico de prueba), obtuvimos un 0.53, y los grados de libertad ofrecían un valor aproximado a 2.7. 
+
+El valor crítico calculado para el primer ejercicio muestra para un nivel de significancia de 0.05 y 4 grados de libertad, es aproximadamente ±2.776 (calculable en R con el código qt(p = 0.025, df = 4) y qt(p = 0.975, df = 4)). En el caso del segundo ejercicio, tenemos un nivel de significancia de 0.05 y 3 grados de libertad, el valor crítico de t en una prueba de dos colas se aproxima a ±3.182. (calculado en R con el código qt(p = 0.025, df = 3) y qt(p = 0.975, df = 3). 
+
+- A continuación se muestran las tablas correspondientes al cálculo de medias en hombres:
+
+``` {r table_fingers3, echo=FALSE, message=FALSE, results='asis'}
+library(knitr)
+library(kableExtra)
+Ejercicio_2_Conjunto_30_calculos_hombres <- data.frame(
+  Hombres = c("Estudiante1", "Estudiante2", "Estudiante3"),
+  x = c(8.0, 7.5, 9.0),
+  "x-x̅" = c(-0.2, -0.7, 0.8),
+  "(x-x̅)^2" = c(0.04, 0.49, 0.64)
+  
+)
+
+
+kable(Ejercicio_2_Conjunto_30_calculos_hombres, caption = "tabla de muestra 1, hombres, calculos estadísticos", format= "latex", booktabs=TRUE) %>% kable_styling(latex_options = "HOLD_position", font_size = 14)
+``` 
+
+Y el cálculo de medias en mujeres:
+
+
+```{r table_fingers4, echo=FALSE, message=FALSE, results='asis'}
+library(knitr)
+library(kableExtra)
+
+Ejercicio_2_Conjunto_30_calculos_mujeres <- data.frame(
+  Mujeres = c("Estudiante1", "Estudiante2", "Estudiante3"),
+  x = c(8.1, 8.0, 7.5),
+  "x-x̅" = c(0.2, 0.1, 0.4),
+  "(x-x̅)^2" = c(0.04, 0.01, 0.16)
+  
+)
+
+
+kable(Ejercicio_2_Conjunto_30_calculos_mujeres, caption = "tabla de muestra 1, mujeres, calculos estadísticos", format= "latex", booktabs=TRUE) %>% kable_styling(latex_options = "HOLD_position", font_size = 14)
+```
+
+
+- Podemos visualizar las varianzas en un diagrama de caja:
+
+```{r table_fingers5, echo=FALSE, message=FALSE}
+
+varianza_hombres <- 0.585  # Varianza de la muestra de hombres
+varianza_mujeres <- 0.105  # Varianza de la muestra de mujeres
+
+
+boxplot(varianza_hombres, varianza_mujeres, 
+        main = "Comparación de Varianzas - Ejercicio 2", 
+        names = c("Hombres", "Mujeres"),
+        col = c("lightgreen", "lightpink"),
+        horizontal = TRUE, xlab = "Varianzas", ylab = "Muestras")
+```
+
+Y podemos resumir los datos estadísticos de la siguiente manera:
+
+```{r}
+summary(Ejercicio_2_Conjunto_30)
+```
+
+
+
+# Discusión
+
+En ambos casos de estudio, el valor de t (t1= -0.41; t2=0.53) quedó dentro del rango esperado(caso 1= +2.776;-2.776. caso 2=+3.182;-3.182), por lo que no se rechaza la hipótesis nula de homogeneidad de medias. Es decir, en ninguno de los casos se muestra una diferencia significativa ni en comparación aleatoria ni en el caso de comparación de sexos. 
+
+
+# Referencias {.unnumbered}
+
+\printbibliography
+
+@Binvignat, O; Almagià, A.; Lizana, P.; & Olave, E. 2012. Aspectos Biométricos de la Mano de Individuos Chilenos. Int. J. Morphol., 30(2):599-606, 2012. http://dx.doi.org/10.4067/S0717-95022012000200040 
+
+@Martinez, R. A. & Losa, A. S. 2017. El procesamiento estadístico con R en la investigación científica. Medisur vol.15 no.5 Cienfuegos set.-oct. 2017. ISSN 1727-897X 
+
+@Sanchez Turcios, R. A. 2015. t-Student. Usos y abusos. Rev. Mex. Cardiol vol.26 no.1 México ene./mar. 2015 ISSN 0188-2198 
+
+
+Notas: no pude citar en apa con la explicacion del video ni con inteligencia artificial. Tampoco pude "imprimir" la bibliografía a pesar de tenerlo en un archivo .bib en Bibtex.
